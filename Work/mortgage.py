@@ -27,9 +27,9 @@ while principal > 0:
 
 
     total_months += 1
-    print(total_months, total_paid, principal )
+    print(f"{total_months} {total_paid:0.2f} {principal:0.2f}" )
         
     if principal < 0:
         overshoot = abs(old_principal - total_payment)
-        print(total_months, "overpaid by", overshoot)
-print("Total Paid", total_paid, " Total_Months", total_months)
+        print(f"{total_months} overpaid by {overshoot}")
+print(f"Total Paid: {total_paid:0.2f} Total_Months: {total_months}")
