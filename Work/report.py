@@ -36,10 +36,17 @@ def read_prices(filename):
 def gain_loss(f_portfolio, f_pricelist):
     portfolio = read_portfolio(f_portfolio)
     pricelist = read_prices(f_pricelist)
-
+    total_gain_los = 0.0
     for i in range(len(portfolio)):
         stock = portfolio[i]['name']
         stock_amount = portfolio[i]['shares']
         boughtprice = float(portfolio[i]['price'])
         sellprice = pricelist[stock]
-        print(stock, boughtprice, sellprice)
+        bought_value = stock_amount * boughtprice
+        current_value = stock_amount * sellprice
+        gain_los = bought_value - current_value
+        total_gain_los += gain_los
+        print(stock, f'{bought_value:0.2f}', f'{current_value:0.2f}', f'{gain_los:0.2f}')
+    print('Total gain loss', f'{total_gain_los}')
+gain_loss('Data/portfolio.csv', 'Data/prices.csv')
+
