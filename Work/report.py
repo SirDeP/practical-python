@@ -48,5 +48,11 @@ def gain_loss(f_portfolio, f_pricelist):
         total_gain_los += gain_los
         print(stock, f'{bought_value:0.2f}', f'{current_value:0.2f}', f'{gain_los:0.2f}')
     print('Total gain loss', f'{total_gain_los}')
+
+def make_report(f_portfolio, f_):
+    portfolio = read_portfolio('Data/portfolio.csv')
+    prices = read_prices('Data/prices.csv')
+    
+
 gain_loss('Data/portfolio.csv', 'Data/prices.csv')
 
