@@ -10,11 +10,11 @@ def portfolio_cost(filename):
     with open(filename, 'rt') as f:
         rows = csv.reader(f)
         headers = next(rows)
-        for row in rows:
+        for n, row in enumerate(rows):
             try:
                 totalcost += int(row[1]) * float(row[2])
             except:
-                print("multiplication failure")
+                print(f"Row{n}: multiplication failure: {row}")
     return totalcost
 
 if len(sys.argv) == 2:
