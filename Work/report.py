@@ -10,14 +10,11 @@ def read_portfolio(filename):
         # headers = next(f).split(',')
         rows = csv.reader(f)
         headers = next(rows)
-        for row in rows:
-            # holding = (row[0], int(row[1]), float(row[2]))
-            # portfolio.append(holding)
-            # d['name'] = row[0]
-            # d['shares'] = int(row[1])
-            # d['price'] = float(row[2])
-            d = { 'name' : row[0], 'shares' : int(row[1]), 'price' : float(row[2])}
-            portfolio.append(d)
+        for n, row in enumerate(rows):
+            record = dict(zip(headers, row))
+            record['shares'] = int(record['shares'])
+            record['price'] = float(record['price'])
+            portfolio.append(record)
     return portfolio
 
 def read_prices(filename):
@@ -58,10 +55,8 @@ def make_report(portfolio, prices):
         report.append(res)
     return report
 
-report =make_report(read_portfolio('Data/portfolio.csv'), read_prices('Data/prices.csv'))
+report = make_report(read_portfolio('Data/portfoliodate.csv'), read_prices('Data/prices.csv'))
 
-#for r in report:
-#    print( '%10s %10d %10.2f %10.2f' % r )
 size = 10
 headers = ('Name', 'Shares', 'Price', 'Change')
 print ( f'{headers[0]:>{size}s} {headers[1]:>{size}s} {headers[2]:>{size}s} {headers[3]:>{size}s}')
