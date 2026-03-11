@@ -4,26 +4,29 @@
 import csv
 import sys
 
+
 def portfolio_cost(filename):
     totalcost = 0.0
 
-    with open(filename, 'rt') as f:
+    with open(filename, "rt") as f:
         rows = csv.reader(f)
         headers = next(rows)
         for n, row in enumerate(rows):
-            record = dict(zip(headers,row))
+            record = dict(zip(headers, row))
             try:
-                nshares = int(record['shares'])
-                price = float(record['price'])
+                nshares = int(record["shares"])
+                price = float(record["price"])
                 totalcost += nshares * price
-            except:
+            except Exception as e:
                 print(f"Row{n}: multiplication failure: {row}")
+                print(f"Row{n}: Reason {e}")
     return totalcost
+
 
 if len(sys.argv) == 2:
     filename = sys.argv[1]
 else:
-    filename = 'Data/portfolio.csv'
+    filename = "Data/portfolio.csv"
 
 cost = portfolio_cost(filename)
-print('Total cost:', cost)
+print("Total cost:", cost)
